@@ -4,8 +4,8 @@ var _model;
 /*************/
 var init = function() {
   _scene = new THREE.Scene();
-  _camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-  _camera.position.set(0, 0, 10);
+  _camera = new THREE.PerspectiveCamera(75, 1.0, 0.1, 1000);
+  _camera.position.set(-10, -10, -50);
   _camera.lookAt(new THREE.Vector3(0.0, 0.0, 0.0));
   _scene.add(_camera);
   
@@ -15,10 +15,15 @@ var init = function() {
   var canvas = document.getElementById("3dcanvas");
   canvas.appendChild(_renderer.domElement);
 
-  var jsLoader = new THREE.JSONLoader(true);
-  jsLoader.load('assets/models/angle.json', function(geometry, material) {
-    _model = new THREE.Mesh(geometry, material);
+  var manager = new THREE.LoadingManager();
+  manager.onProgress = function(item, loaded, total) {
+    console.log(item, loaded, total);
+  };
+  var jsLoader = new THREE.OBJLoader(manager);
+  jsLoader.load('assets/models/angle.obj', function(object) {
+    _model = object
     _scene.add(_model);
+    console.log("LOAD DONE");
   });
 
   var ambientLight = new THREE.AmbientLight(0xffffff);
@@ -34,4 +39,5 @@ var render = function(timestamp) {
 }
 
 init();
+console.log("RUN");
 render();
