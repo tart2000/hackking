@@ -3,7 +3,7 @@ title: "HackKing Versailles"
 email: "ping@mozzarellabs.com"
 description: A web app to build a customized picture frame
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "h" # the base hostname & protocol for your site
+url: "" # the base hostname & protocol for your site
 twitter_username: mozzarellabs
 github_username:  tart2000
 
